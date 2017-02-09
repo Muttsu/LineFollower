@@ -1,0 +1,71 @@
+[p LITE_MODE AUTOSTATIC PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1619 ]
+[d frameptr 6 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"16 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
+[v _main main `(i  1 e 2 0 ]
+"14 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
+[v _CalcError CalcError `(i  1 e 2 0 ]
+"16 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
+[v _main main `(i  1 e 2 0 ]
+{
+"23
+} 0
+"14 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
+[v _CalcError CalcError `(i  1 e 2 0 ]
+{
+"26
+[v CalcError@proportional proportional `ui  1 a 2 28 ]
+"30
+[v CalcError@differential differential `ui  1 a 2 20 ]
+"25
+[v CalcError@position position `ui  1 a 2 18 ]
+"31
+[v CalcError@error error `ui  1 a 2 16 ]
+"18
+[v CalcError@i i `uc  1 a 1 30 ]
+"15
+[v CalcError@sensors sensors `[8]ui  1 a 16 0 ]
+"17
+[v CalcError@sum sum `ui  1 a 2 26 ]
+"16
+[v CalcError@meanSum meanSum `ui  1 a 2 24 ]
+"14
+[v CalcError@F12167 F12167 `[8]ui  1 s 16 F12167 ]
+"27
+[v CalcError@_proportional _proportional `ui  1 s 2 proportional ]
+"28
+[v CalcError@integral integral `ui  1 s 2 integral ]
+"38
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"6 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 5 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 7 ]
+"6
+[v ___lwdiv@divisor divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
+"31
+} 0
