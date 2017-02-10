@@ -8,17 +8,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*Prototypes*/
+#include "MOD_Correction.h"
 
+#define Kp 1
+
+/*Prototypes*/
 /*
  *
  */
-int main(int argc, char** argv) {
+void main() {
 
     for(;;){
-        CalcError();
+        int asdf = 0;
+        asdf = CalcError(1,1,1,1000);
     }
-
-    return (EXIT_SUCCESS);
 }
 

@@ -10867,40 +10867,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 192: extern unsigned char __resetbits;
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
-[; ;MOD_Correction.c: 12: uint16_t CalcError();
-"14 MOD_Correction.c
-[v _CalcError `(ui ~T0 @X0 1 ef ]
+[; ;MOD_Correction.h: 11: int CalcError(unsigned int,unsigned int,unsigned int,unsigned int);
+"11 MOD_Correction.c
+[v _CalcError `(i ~T0 @X0 1 ef4`ui`ui`ui`ui ]
 {
-[; ;MOD_Correction.c: 14: uint16_t CalcError(){
+[; ;MOD_Correction.c: 11: int CalcError(unsigned int Kp, unsigned int Ki, unsigned int Kd, unsigned int DIVIDER){
 [e :U _CalcError ]
+[v _Kp `ui ~T0 @X0 1 r1 ]
+[v _Ki `ui ~T0 @X0 1 r2 ]
+[v _Kd `ui ~T0 @X0 1 r3 ]
+[v _DIVIDER `ui ~T0 @X0 1 r4 ]
 [f ]
-[v F12167 `ui ~T0 @X0 -> 0 `x s ]
-[i F12167
+[v F12175 `ui ~T0 @X0 -> 0 `x s ]
+[i F12175
 :U ..
-"15
+"12
 -> -> 0 `i `ui
 -> -> 0 `i `ui
 -> -> 0 `i `ui
--> -> 1 `i `ui
--> -> 1 `i `ui
+-> -> 0 `i `ui
+-> -> 0 `i `ui
 -> -> 0 `i `ui
 -> -> 0 `i `ui
 -> -> 0 `i `ui
 ..
 ]
 [v _sensors `ui ~T0 @X0 8  a ]
-[; ;MOD_Correction.c: 15: uint16_t sensors[]={0,0,0,1,1,0,0,0};
-[e = _sensors F12167 ]
-"16
+[; ;MOD_Correction.c: 12: unsigned int sensors[]={0,0,0,0,0,0,0,0};
+[e = _sensors F12175 ]
+"13
 [v _meanSum `ui ~T0 @X0 1 a ]
-[; ;MOD_Correction.c: 16: uint16_t meanSum = 0;
+[; ;MOD_Correction.c: 13: unsigned int meanSum = 0;
 [e = _meanSum -> -> 0 `i `ui ]
-"17
+"14
 [v _sum `ui ~T0 @X0 1 a ]
-[; ;MOD_Correction.c: 17: uint16_t sum = 0;
+[; ;MOD_Correction.c: 14: unsigned int sum = 0;
 [e = _sum -> -> 0 `i `ui ]
-[; ;MOD_Correction.c: 18: for (char i = 0; i < 6; i++){
-"18
+[; ;MOD_Correction.c: 15: for (char i = 0; i < 6; i++){
+"15
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -10908,80 +10912,80 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 1218  ]
 [e :U 1217 ]
 {
-[; ;MOD_Correction.c: 21: meanSum += sensors[i]*i*1000;
-"21
-[e =+ _meanSum * * *U + &U _sensors * -> _i `ux -> -> # *U &U _sensors `ui `ux -> _i `ui -> -> 1000 `i `ui ]
-[; ;MOD_Correction.c: 22: sum += sensors[i];
-"22
-[e =+ _sum *U + &U _sensors * -> _i `ux -> -> # *U &U _sensors `ui `ux ]
-"23
-}
+[; ;MOD_Correction.c: 18: meanSum += sensors[i]*i*1000;
 "18
+[e =+ _meanSum * * *U + &U _sensors * -> _i `ux -> -> # *U &U _sensors `ui `ux -> _i `ui -> -> 1000 `i `ui ]
+[; ;MOD_Correction.c: 19: sum += sensors[i];
+"19
+[e =+ _sum *U + &U _sensors * -> _i `ux -> -> # *U &U _sensors `ui `ux ]
+"20
+}
+"15
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 6 `i 1217  ]
 [e :U 1218 ]
-"23
+"20
 }
-[; ;MOD_Correction.c: 23: }
-[; ;MOD_Correction.c: 24: if (sum!=0){
-"24
+[; ;MOD_Correction.c: 20: }
+[; ;MOD_Correction.c: 21: if (sum!=0){
+"21
 [e $ ! != _sum -> -> 0 `i `ui 1220  ]
 {
-"25
+"22
 [v _position `ui ~T0 @X0 1 a ]
-[; ;MOD_Correction.c: 25: uint16_t position = meanSum/sum;
+[; ;MOD_Correction.c: 22: unsigned int position = meanSum/sum;
 [e = _position / _meanSum _sum ]
-"26
+"23
 [v _proportional `ui ~T0 @X0 1 a ]
-[; ;MOD_Correction.c: 26: uint16_t proportional = position - 3500;
+[; ;MOD_Correction.c: 23: unsigned int proportional = position - 3500;
 [e = _proportional - _position -> -> 3500 `i `ui ]
+"24
+[v F12181 `ui ~T0 @X0 1 s _proportional ]
+[i F12181
+-> -> 0 `i `ui
+]
+"25
+[v F12182 `ui ~T0 @X0 1 s integral ]
+[i F12182
+-> -> 0 `i `ui
+]
+[; ;MOD_Correction.c: 24: static unsigned int _proportional = 0;
+[; ;MOD_Correction.c: 25: static unsigned int integral = 0;
+[; ;MOD_Correction.c: 26: integral += proportional;
+"26
+[e =+ F12182 _proportional ]
 "27
-[v F12173 `ui ~T0 @X0 1 s _proportional ]
-[i F12173
--> -> 0 `i `ui
-]
-"28
-[v F12174 `ui ~T0 @X0 1 s integral ]
-[i F12174
--> -> 0 `i `ui
-]
-[; ;MOD_Correction.c: 27: static uint16_t _proportional = 0;
-[; ;MOD_Correction.c: 28: static uint16_t integral = 0;
-[; ;MOD_Correction.c: 29: integral += proportional;
-"29
-[e =+ F12174 _proportional ]
-"30
 [v _differential `ui ~T0 @X0 1 a ]
-[; ;MOD_Correction.c: 30: uint16_t differential = proportional - _proportional;
-[e = _differential - _proportional F12173 ]
-"31
+[; ;MOD_Correction.c: 27: unsigned int differential = proportional - _proportional;
+[e = _differential - _proportional F12181 ]
+"28
 [v _error `ui ~T0 @X0 1 a ]
-[; ;MOD_Correction.c: 31: uint16_t error = 1*+1*integral+1*differential;
-[e = _error + * -> * -> 1 `i -> 1 `i `ui F12174 * -> -> 1 `i `ui _differential ]
-[; ;MOD_Correction.c: 32: _proportional = proportional;
+[; ;MOD_Correction.c: 28: unsigned int error = Kp*+Ki*integral+Kd*differential;
+[e = _error + * * _Kp _Ki F12182 * _Kd _differential ]
+[; ;MOD_Correction.c: 29: _proportional = proportional;
+"29
+[e = F12181 _proportional ]
+[; ;MOD_Correction.c: 30: return error/DIVIDER;
+"30
+[e ) -> / _error _DIVIDER `i ]
+[e $UE 1216  ]
+"31
+}
+[; ;MOD_Correction.c: 31: }
+[e $U 1221  ]
 "32
-[e = F12173 _proportional ]
-[; ;MOD_Correction.c: 33: return error/1;
+[e :U 1220 ]
+[; ;MOD_Correction.c: 32: else{
+{
+[; ;MOD_Correction.c: 33: return -1;
 "33
-[e ) / _error -> -> 1 `i `ui ]
+[e ) -U -> 1 `i ]
 [e $UE 1216  ]
 "34
 }
-[; ;MOD_Correction.c: 34: }
-[e $U 1221  ]
-"35
-[e :U 1220 ]
-[; ;MOD_Correction.c: 35: else{
-{
-[; ;MOD_Correction.c: 36: return -1;
-"36
-[e ) -> -U -> 1 `i `ui ]
-[e $UE 1216  ]
-"37
-}
 [e :U 1221 ]
-[; ;MOD_Correction.c: 37: }
-[; ;MOD_Correction.c: 38: }
-"38
+[; ;MOD_Correction.c: 34: }
+[; ;MOD_Correction.c: 35: }
+"35
 [e :UE 1216 ]
 }

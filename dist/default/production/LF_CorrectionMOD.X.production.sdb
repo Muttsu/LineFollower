@@ -11,41 +11,47 @@
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
-"16 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
-[v _main main `(i  1 e 2 0 ]
-"14 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
+"19 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
+[v _main main `(v  1 e 1 0 ]
+"11 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
 [v _CalcError CalcError `(i  1 e 2 0 ]
-"16 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
-[v _main main `(i  1 e 2 0 ]
+"19 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"22
+[v main@asdf asdf `i  1 a 2 10 ]
+"25
+} 0
+"11 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
+[v _CalcError CalcError `(i  1 e 2 0 ]
 {
 "23
-} 0
-"14 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
-[v _CalcError CalcError `(i  1 e 2 0 ]
-{
-"26
-[v CalcError@proportional proportional `ui  1 a 2 28 ]
-"30
-[v CalcError@differential differential `ui  1 a 2 20 ]
-"25
-[v CalcError@position position `ui  1 a 2 18 ]
-"31
-[v CalcError@error error `ui  1 a 2 16 ]
-"18
-[v CalcError@i i `uc  1 a 1 30 ]
-"15
-[v CalcError@sensors sensors `[8]ui  1 a 16 0 ]
-"17
-[v CalcError@sum sum `ui  1 a 2 26 ]
-"16
-[v CalcError@meanSum meanSum `ui  1 a 2 24 ]
-"14
-[v CalcError@F12167 F12167 `[8]ui  1 s 16 F12167 ]
-"27
-[v CalcError@_proportional _proportional `ui  1 s 2 proportional ]
+[v CalcError@proportional proportional `ui  1 a 2 36 ]
 "28
+[v CalcError@error error `ui  1 a 2 28 ]
+"27
+[v CalcError@differential differential `ui  1 a 2 26 ]
+"22
+[v CalcError@position position `ui  1 a 2 24 ]
+"15
+[v CalcError@i i `uc  1 a 1 38 ]
+"12
+[v CalcError@sensors sensors `[8]ui  1 a 16 8 ]
+"14
+[v CalcError@sum sum `ui  1 a 2 32 ]
+"13
+[v CalcError@meanSum meanSum `ui  1 a 2 30 ]
+"11
+[v CalcError@Kp Kp `ui  1 p 2 0 ]
+[v CalcError@Ki Ki `ui  1 p 2 2 ]
+[v CalcError@Kd Kd `ui  1 p 2 4 ]
+[v CalcError@DIVIDER DIVIDER `ui  1 p 2 6 ]
+[v CalcError@F12175 F12175 `[8]ui  1 s 16 F12175 ]
+"24
+[v CalcError@_proportional _proportional `ui  1 s 2 proportional ]
+"25
 [v CalcError@integral integral `ui  1 s 2 integral ]
-"38
+"35
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]

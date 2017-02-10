@@ -14792,29 +14792,30 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 12 "MOD_Correction.c"
-uint16_t CalcError();
+# 11 "MOD_Correction.h"
+int CalcError(unsigned int,unsigned int,unsigned int,unsigned int);
 
-uint16_t CalcError(){
-uint16_t sensors[]={0,0,0,1,1,0,0,0};
-uint16_t meanSum = 0;
-uint16_t sum = 0;
+# 11 "MOD_Correction.c"
+int CalcError(unsigned int Kp, unsigned int Ki, unsigned int Kd, unsigned int DIVIDER){
+unsigned int sensors[]={0,0,0,0,0,0,0,0};
+unsigned int meanSum = 0;
+unsigned int sum = 0;
 for (char i = 0; i < 6; i++){
 
-# 21
+# 18
 meanSum += sensors[i]*i*1000;
 sum += sensors[i];
 }
 if (sum!=0){
-uint16_t position = meanSum/sum;
-uint16_t proportional = position - 3500;
-static uint16_t _proportional = 0;
-static uint16_t integral = 0;
+unsigned int position = meanSum/sum;
+unsigned int proportional = position - 3500;
+static unsigned int _proportional = 0;
+static unsigned int integral = 0;
 integral += proportional;
-uint16_t differential = proportional - _proportional;
-uint16_t error = 1*+1*integral+1*differential;
+unsigned int differential = proportional - _proportional;
+unsigned int error = Kp*+Ki*integral+Kd*differential;
 _proportional = proportional;
-return error/1;
+return error/DIVIDER;
 }
 else{
 return -1;
