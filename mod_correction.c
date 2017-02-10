@@ -3,12 +3,12 @@
 #include <stdint.h>
 #include <xc.h>
 
-#include "MOD_Correction.h"
+#include "bsp.h"
+#include "config.h"
 
 #define SET_POINT 3500
-#define uint unsigned int
 
-int CalcError(uint Kp, uint Ki, uint Kd, uint DIVIDER){
+int CalcError(){
     uint sensors[]={0,0,0,0,0,0,0,0};
     uint meanSum = 0;
     uint sum = 0;

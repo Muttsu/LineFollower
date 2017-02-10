@@ -138,10 +138,10 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
-# 11 "MOD_Correction.h"
-int CalcError(unsigned int,unsigned int,unsigned int,unsigned int);
+# 15 "mod_correction.h"
+int CalcError();
 
-# 19 "main.c"
+# 18 "main.c"
 void main() {
 
 for(;;){

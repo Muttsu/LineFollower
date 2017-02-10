@@ -1,5 +1,5 @@
 
-# 1 "MOD_Correction.c"
+# 1 "mod_correction.c"
 
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.41\include\__size_t.h"
 typedef unsigned size_t;
@@ -14792,11 +14792,11 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
-# 11 "MOD_Correction.h"
-int CalcError(unsigned int,unsigned int,unsigned int,unsigned int);
+# 15 "mod_correction.h"
+int CalcError();
 
-# 11 "MOD_Correction.c"
-int CalcError(unsigned int Kp, unsigned int Ki, unsigned int Kd, unsigned int DIVIDER){
+# 11 "mod_correction.c"
+int CalcError(){
 unsigned int sensors[]={0,0,0,0,0,0,0,0};
 unsigned int meanSum = 0;
 unsigned int sum = 0;
@@ -14813,9 +14813,9 @@ static unsigned int _proportional = 0;
 static unsigned int integral = 0;
 integral += proportional;
 unsigned int differential = proportional - _proportional;
-unsigned int error = Kp*+Ki*integral+Kd*differential;
+unsigned int error = 1*+1*integral+1*differential;
 _proportional = proportional;
-return error/DIVIDER;
+return error/1000;
 }
 else{
 return -1;

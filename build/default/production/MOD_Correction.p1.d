@@ -1,4 +1,6 @@
- build/default/production/MOD_Correction.d  \
- build/default/production/MOD_Correction.p1:  \
- MOD_Correction.c  \
-MOD_Correction.h 
+ build/default/production/mod_correction.d  \
+ build/default/production/mod_correction.p1:  \
+ mod_correction.c  \
+bsp.h  \
+mod_correction.h  \
+config.h 

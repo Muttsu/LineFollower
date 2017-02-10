@@ -8,9 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "MOD_Correction.h"
-
-#define Kp 1
+#include "bsp.h"
+#include "config.h"
 
 /*Prototypes*/
 /*

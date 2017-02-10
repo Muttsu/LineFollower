@@ -11,18 +11,18 @@
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
-"19 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
+"18 C:\Users\Muutt\Documents\Projects\LineFollower.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"11 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
+"11 C:\Users\Muutt\Documents\Projects\LineFollower.X\mod_correction.c
 [v _CalcError CalcError `(i  1 e 2 0 ]
-"19 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\main.c
+"18 C:\Users\Muutt\Documents\Projects\LineFollower.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"22
+"21
 [v main@asdf asdf `i  1 a 2 10 ]
-"25
+"24
 } 0
-"11 C:\Users\Muutt\Documents\Projects\LF_CorrectionMOD.X\MOD_Correction.c
+"11 C:\Users\Muutt\Documents\Projects\LineFollower.X\mod_correction.c
 [v _CalcError CalcError `(i  1 e 2 0 ]
 {
 "23
@@ -38,15 +38,11 @@
 "12
 [v CalcError@sensors sensors `[8]ui  1 a 16 8 ]
 "14
-[v CalcError@sum sum `ui  1 a 2 32 ]
+[v CalcError@sum sum `ui  1 a 2 34 ]
 "13
-[v CalcError@meanSum meanSum `ui  1 a 2 30 ]
+[v CalcError@meanSum meanSum `ui  1 a 2 32 ]
 "11
-[v CalcError@Kp Kp `ui  1 p 2 0 ]
-[v CalcError@Ki Ki `ui  1 p 2 2 ]
-[v CalcError@Kd Kd `ui  1 p 2 4 ]
-[v CalcError@DIVIDER DIVIDER `ui  1 p 2 6 ]
-[v CalcError@F12175 F12175 `[8]ui  1 s 16 F12175 ]
+[v CalcError@F12167 F12167 `[8]ui  1 s 16 F12167 ]
 "24
 [v CalcError@_proportional _proportional `ui  1 s 2 proportional ]
 "25
