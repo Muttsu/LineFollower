@@ -8,6 +8,7 @@
 #ifndef CONFIG_H
 #define	CONFIG_H
 
+#include "bsp.h"
 #include "mod_correction.h"
 
 

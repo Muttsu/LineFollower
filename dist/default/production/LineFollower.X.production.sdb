@@ -11,43 +11,43 @@
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
-"18 C:\Users\Muutt\Documents\Projects\LineFollower.X\main.c
+"17 C:\Users\Muutt\Documents\Projects\LineFollower.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"11 C:\Users\Muutt\Documents\Projects\LineFollower.X\mod_correction.c
+"10 C:\Users\Muutt\Documents\Projects\LineFollower.X\MOD_Correction.c
 [v _CalcError CalcError `(i  1 e 2 0 ]
-"18 C:\Users\Muutt\Documents\Projects\LineFollower.X\main.c
+"17 C:\Users\Muutt\Documents\Projects\LineFollower.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"21
-[v main@asdf asdf `i  1 a 2 10 ]
-"24
-} 0
-"11 C:\Users\Muutt\Documents\Projects\LineFollower.X\mod_correction.c
-[v _CalcError CalcError `(i  1 e 2 0 ]
-{
+"20
+[v main@asdf asdf `i  1 a 2 12 ]
 "23
-[v CalcError@proportional proportional `ui  1 a 2 36 ]
-"28
-[v CalcError@error error `ui  1 a 2 28 ]
-"27
-[v CalcError@differential differential `ui  1 a 2 26 ]
+} 0
+"10 C:\Users\Muutt\Documents\Projects\LineFollower.X\MOD_Correction.c
+[v _CalcError CalcError `(i  1 e 2 0 ]
+{
 "22
-[v CalcError@position position `ui  1 a 2 24 ]
-"15
-[v CalcError@i i `uc  1 a 1 38 ]
-"12
-[v CalcError@sensors sensors `[8]ui  1 a 16 8 ]
+[v CalcError@proportional proportional `ui  1 a 2 28 ]
+"27
+[v CalcError@error error `ui  1 a 2 20 ]
+"26
+[v CalcError@differential differential `ui  1 a 2 18 ]
+"21
+[v CalcError@position position `ui  1 a 2 16 ]
 "14
-[v CalcError@sum sum `ui  1 a 2 34 ]
-"13
-[v CalcError@meanSum meanSum `ui  1 a 2 32 ]
+[v CalcError@i i `uc  1 a 1 30 ]
 "11
+[v CalcError@sensors sensors `[8]ui  1 a 16 0 ]
+"13
+[v CalcError@sum sum `ui  1 a 2 26 ]
+"12
+[v CalcError@meanSum meanSum `ui  1 a 2 24 ]
+"10
 [v CalcError@F12167 F12167 `[8]ui  1 s 16 F12167 ]
-"24
+"23
 [v CalcError@_proportional _proportional `ui  1 s 2 proportional ]
-"25
+"24
 [v CalcError@integral integral `ui  1 s 2 integral ]
-"35
+"34
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]

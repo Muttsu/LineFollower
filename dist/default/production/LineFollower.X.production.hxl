@@ -1,11 +1,11 @@
 ### HEXMate logfile and output summary ###
 ### Memory Usage ###
  Unused memory ranges:
-  8h - DCFh
+  8h - DF5h
   
  dist/default/production\LineFollower.X.production.hex ranges:
   0h - 7h
-  DD0h - FFFh
+  DF6h - FFFh
   
 ### Hex Memory Map ###
  Legend:
@@ -20,7 +20,7 @@
   X = Find & delete opcode
   1 = dist/default/production\LineFollower.X.production.hex
 00000000: 11111111--------------------------------------------------------
-00000DC0: ----------------111111111111111111111111111111111111111111111111
+00000DC0: ------------------------------------------------------1111111111
 00000E00: 1111111111111111111111111111111111111111111111111111111111111111
 00000E40: 1111111111111111111111111111111111111111111111111111111111111111
 00000E80: 1111111111111111111111111111111111111111111111111111111111111111

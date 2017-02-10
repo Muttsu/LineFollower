@@ -141,12 +141,12 @@ extern char * ftoa(float f, int * status);
 # 15 "mod_correction.h"
 int CalcError();
 
-# 18 "main.c"
+# 17 "main.c"
 void main() {
 
 for(;;){
 int asdf = 0;
-asdf = CalcError(1,1,1,1000);
+asdf = CalcError();
 }
 }
 

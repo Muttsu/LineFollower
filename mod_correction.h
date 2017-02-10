@@ -26,4 +26,3 @@ int CalcError();
 
 
 #endif	/* MOD_CORRECTION_H */
-

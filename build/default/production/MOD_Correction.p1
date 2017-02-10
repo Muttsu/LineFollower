@@ -10868,16 +10868,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 193: extern __bit __powerdown;
 [; ;pic.h: 194: extern __bit __timeout;
 [; ;mod_correction.h: 15: int CalcError();
-"11 mod_correction.c
+"10 MOD_Correction.c
 [v _CalcError `(i ~T0 @X0 1 ef ]
 {
-[; ;mod_correction.c: 11: int CalcError(){
+[; ;MOD_Correction.c: 10: int CalcError(){
 [e :U _CalcError ]
 [f ]
 [v F12167 `ui ~T0 @X0 -> 0 `x s ]
 [i F12167
 :U ..
-"12
+"11
 -> -> 0 `i `ui
 -> -> 0 `i `ui
 -> -> 0 `i `ui
@@ -10889,18 +10889,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [v _sensors `ui ~T0 @X0 8  a ]
-[; ;mod_correction.c: 12: unsigned int sensors[]={0,0,0,0,0,0,0,0};
+[; ;MOD_Correction.c: 11: unsigned int sensors[]={0,0,0,0,0,0,0,0};
 [e = _sensors F12167 ]
-"13
+"12
 [v _meanSum `ui ~T0 @X0 1 a ]
-[; ;mod_correction.c: 13: unsigned int meanSum = 0;
+[; ;MOD_Correction.c: 12: unsigned int meanSum = 0;
 [e = _meanSum -> -> 0 `i `ui ]
-"14
+"13
 [v _sum `ui ~T0 @X0 1 a ]
-[; ;mod_correction.c: 14: unsigned int sum = 0;
+[; ;MOD_Correction.c: 13: unsigned int sum = 0;
 [e = _sum -> -> 0 `i `ui ]
-[; ;mod_correction.c: 15: for (char i = 0; i < 6; i++){
-"15
+[; ;MOD_Correction.c: 14: for (char i = 0; i < 6; i++){
+"14
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
@@ -10908,80 +10908,80 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 1218  ]
 [e :U 1217 ]
 {
-[; ;mod_correction.c: 18: meanSum += sensors[i]*i*1000;
-"18
+[; ;MOD_Correction.c: 17: meanSum += sensors[i]*i*1000;
+"17
 [e =+ _meanSum * * *U + &U _sensors * -> _i `ux -> -> # *U &U _sensors `ui `ux -> _i `ui -> -> 1000 `i `ui ]
-[; ;mod_correction.c: 19: sum += sensors[i];
-"19
+[; ;MOD_Correction.c: 18: sum += sensors[i];
+"18
 [e =+ _sum *U + &U _sensors * -> _i `ux -> -> # *U &U _sensors `ui `ux ]
-"20
+"19
 }
-"15
+"14
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 6 `i 1217  ]
 [e :U 1218 ]
-"20
+"19
 }
-[; ;mod_correction.c: 20: }
-[; ;mod_correction.c: 21: if (sum!=0){
-"21
+[; ;MOD_Correction.c: 19: }
+[; ;MOD_Correction.c: 20: if (sum!=0){
+"20
 [e $ ! != _sum -> -> 0 `i `ui 1220  ]
 {
-"22
+"21
 [v _position `ui ~T0 @X0 1 a ]
-[; ;mod_correction.c: 22: unsigned int position = meanSum/sum;
+[; ;MOD_Correction.c: 21: unsigned int position = meanSum/sum;
 [e = _position / _meanSum _sum ]
-"23
+"22
 [v _proportional `ui ~T0 @X0 1 a ]
-[; ;mod_correction.c: 23: unsigned int proportional = position - 3500;
+[; ;MOD_Correction.c: 22: unsigned int proportional = position - 3500;
 [e = _proportional - _position -> -> 3500 `i `ui ]
-"24
+"23
 [v F12173 `ui ~T0 @X0 1 s _proportional ]
 [i F12173
 -> -> 0 `i `ui
 ]
-"25
+"24
 [v F12174 `ui ~T0 @X0 1 s integral ]
 [i F12174
 -> -> 0 `i `ui
 ]
-[; ;mod_correction.c: 24: static unsigned int _proportional = 0;
-[; ;mod_correction.c: 25: static unsigned int integral = 0;
-[; ;mod_correction.c: 26: integral += proportional;
-"26
+[; ;MOD_Correction.c: 23: static unsigned int _proportional = 0;
+[; ;MOD_Correction.c: 24: static unsigned int integral = 0;
+[; ;MOD_Correction.c: 25: integral += proportional;
+"25
 [e =+ F12174 _proportional ]
-"27
+"26
 [v _differential `ui ~T0 @X0 1 a ]
-[; ;mod_correction.c: 27: unsigned int differential = proportional - _proportional;
+[; ;MOD_Correction.c: 26: unsigned int differential = proportional - _proportional;
 [e = _differential - _proportional F12173 ]
-"28
+"27
 [v _error `ui ~T0 @X0 1 a ]
-[; ;mod_correction.c: 28: unsigned int error = 1*+1*integral+1*differential;
+[; ;MOD_Correction.c: 27: unsigned int error = 1*+1*integral+1*differential;
 [e = _error + * -> * -> 1 `i -> 1 `i `ui F12174 * -> -> 1 `i `ui _differential ]
-[; ;mod_correction.c: 29: _proportional = proportional;
-"29
+[; ;MOD_Correction.c: 28: _proportional = proportional;
+"28
 [e = F12173 _proportional ]
-[; ;mod_correction.c: 30: return error/1000;
-"30
+[; ;MOD_Correction.c: 29: return error/1000;
+"29
 [e ) -> / _error -> -> 1000 `i `ui `i ]
 [e $UE 1216  ]
-"31
+"30
 }
-[; ;mod_correction.c: 31: }
+[; ;MOD_Correction.c: 30: }
 [e $U 1221  ]
-"32
+"31
 [e :U 1220 ]
-[; ;mod_correction.c: 32: else{
+[; ;MOD_Correction.c: 31: else{
 {
-[; ;mod_correction.c: 33: return -1;
-"33
+[; ;MOD_Correction.c: 32: return -1;
+"32
 [e ) -U -> 1 `i ]
 [e $UE 1216  ]
-"34
+"33
 }
 [e :U 1221 ]
-[; ;mod_correction.c: 34: }
-[; ;mod_correction.c: 35: }
-"35
+[; ;MOD_Correction.c: 33: }
+[; ;MOD_Correction.c: 34: }
+"34
 [e :UE 1216 ]
 }

@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <xc.h>
 
-#include "bsp.h"
 #include "config.h"
 
 #define SET_POINT 3500
