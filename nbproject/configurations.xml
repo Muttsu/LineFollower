@@ -5,7 +5,6 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>config.h</itemPath>
-      <itemPath>mod_correction.h</itemPath>
       <itemPath>bsp.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -16,7 +15,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>main.c</itemPath>
-      <itemPath>MOD_Correction.c</itemPath>
       <itemPath>bsp.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -33,9 +31,9 @@
         <targetDevice>PIC16F1619</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PKOBSKDEPlatformTool</platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>1.41</languageToolchainVersion>
+        <languageToolchainVersion>1.40</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>

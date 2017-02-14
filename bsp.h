@@ -8,7 +8,7 @@
 #ifndef BSP_H
 #define	BSP_H
 
-void Init(void);
+
 
 #endif	/* BSP_H */
 
