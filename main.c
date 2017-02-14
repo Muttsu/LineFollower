@@ -8,17 +8,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "config.h"
+#include "config.h" //includes general configuration and declarations
 
-/*Prototypes*/
-/*
- *
- */
 void main() {
-
+    Init(); //included in bsp.c
     for(;;){
-        int asdf = 0;
-        asdf = CalcError();
+        
     }
 }
 
+void interrupt ISR(){
+    
+}

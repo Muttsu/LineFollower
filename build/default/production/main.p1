@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"15 mod_correction.h
-[v _CalcError `(i ~T0 @X0 0 ef ]
+"11 bsp.h
+[v _Init `(v ~T0 @X0 0 ef ]
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;stdarg.h: 7: typedef void * va_list[1];
 [; ;stdarg.h: 10: extern void * __va_start(void);
@@ -83,32 +83,40 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
 [; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
 [; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;bsp.h: 11: void Init(void);
 [; ;mod_correction.h: 15: int CalcError();
-"17 main.c
+"13 main.c
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 17: void main() {
+[; ;main.c: 13: void main() {
 [e :U _main ]
 [f ]
-[; ;main.c: 19: for(;;){
-"19
+[; ;main.c: 14: Init();
+"14
+[e ( _Init ..  ]
+[; ;main.c: 15: for(;;){
+"15
 {
 [e :U 7 ]
 {
-"20
-[v _asdf `i ~T0 @X0 1 a ]
-[; ;main.c: 20: int asdf = 0;
-[e = _asdf -> 0 `i ]
-[; ;main.c: 21: asdf = CalcError();
-"21
-[e = _asdf ( _CalcError ..  ]
-"22
+"17
 }
-[; ;main.c: 22: }
+[; ;main.c: 17: }
 [e $U 7  ]
 [e :U 8 ]
 }
-[; ;main.c: 23: }
-"23
+[; ;main.c: 18: }
+"18
 [e :UE 6 ]
+}
+[v F189 `(v ~T0 @X0 1 tf ]
+"20
+[v _ISR `IF189 ~T0 @X0 1 e ]
+{
+[; ;main.c: 20: void interrupt ISR(){
+[e :U _ISR ]
+[f ]
+[; ;main.c: 22: }
+"22
+[e :UE 10 ]
 }

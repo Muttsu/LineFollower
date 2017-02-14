@@ -14792,6 +14792,9 @@ extern unsigned char __resetbits;
 extern __bit __powerdown;
 extern __bit __timeout;
 
+# 11 "bsp.h"
+void Init(void);
+
 # 15 "mod_correction.h"
 int CalcError();
 

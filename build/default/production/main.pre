@@ -138,15 +138,20 @@ extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
 
+# 11 "bsp.h"
+void Init(void);
+
 # 15 "mod_correction.h"
 int CalcError();
 
-# 17 "main.c"
+# 13 "main.c"
 void main() {
-
+Init();
 for(;;){
-int asdf = 0;
-asdf = CalcError();
+
 }
 }
 
+void interrupt ISR(){
+
+}

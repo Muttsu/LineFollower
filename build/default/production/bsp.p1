@@ -1,2 +1,13 @@
 Version 3.2 HI-TECH Software Intermediate Code
+[; ;bsp.h: 11: void Init(void);
 [; ;mod_correction.h: 15: int CalcError();
+"4 bsp.c
+[v _Init `(v ~T0 @X0 1 ef ]
+{
+[; ;bsp.c: 4: void Init(){
+[e :U _Init ]
+[f ]
+[; ;bsp.c: 6: }
+"6
+[e :UE 1 ]
+}

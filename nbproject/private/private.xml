@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/main.c</file>
-            <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/mod_correction.c</file>
             <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/config.h</file>
-            <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/mod_correction.h</file>
+            <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/mod_correction.c</file>
             <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/bsp.c</file>
+            <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/mod_correction.h</file>
             <file>file:/C:/Users/Muutt/Documents/Projects/LineFollower.X/bsp.h</file>
         </group>
     </open-files>
