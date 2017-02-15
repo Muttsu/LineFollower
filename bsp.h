@@ -1,6 +1,6 @@
 /* 
  * File:   bsp.h
- * Author: Muutt
+ * Author: Muttsu
  *
  * Created on February 10, 2017, 3:55 PM
  */
@@ -11,4 +11,3 @@
 
 
 #endif	/* BSP_H */
-
