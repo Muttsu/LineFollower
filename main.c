@@ -8,8 +8,6 @@
 
 #include "config.h" //includes general configuration and declarations
 
-void init(void);
-
 void main() {
     init(); //included in bsp.c
     for(;;){
@@ -18,12 +16,9 @@ void main() {
 }
 
 void interrupt ISR(){
-    
-}
-
-void init(){
-    OSCCON = 0b11110000;
-    OPTION_REG = 0b11010000 | TMR0_PS;
-    TMR0IE = TMR0_IE;
-    GIE=GENERAL_INTERRUPT_ENABLE;
+    if(TMR0IF){
+        
+        TMR0IF = 0;
+        TMR0 = TMR0_INIT;
+    }
 }
