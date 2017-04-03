@@ -17,8 +17,8 @@
 //GENERAL BOARD CONFIGURATIONS//////////////////////////////////////////////////
 #define GENERAL_INTERRUPT_ENABLE 1 //set to 1 to enable interrupts
 #define TMR0_IE 1
-#define TMR0_INIT 6             //timer0 set to flag every ms
-#define TMR0_PS 4               //
+#define TMR0_INIT 100             //timer0 set to flag every ms
+#define TMR0_PS 7               //
 ////////////////////////////////////////////////////////////////////////////////
 
 //GENERAL MACROS////////////////////////////////////////////////////////////////

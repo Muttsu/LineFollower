@@ -5,11 +5,17 @@
 
 #include "config.h"
 
-#define MULTIPLIER 6
-#define SET_POINT 21
+#define MULTIPLIER //unused
+#define SET_POINT setPoint
 #define ERROR -1
 
-char IR[] = {0,0,0,0,0,0,1,1};
+char IR[] = {0,0,0,0,0,0,0,0};
+char setPoint = 7;
+
+void Mod_Correction_Init(){
+    setPoint = GetPos();
+    PID_Init();
+}
 
 void UpdateIR(){
     IR[0] = IR0;
@@ -22,39 +28,26 @@ void UpdateIR(){
     IR[7] = IR7;
 }
 
-int CalcError(){
-    static uint meanSum,sum,proportional,integral,differential,_proportional,error;
-    for (char i = 0; i < 8; i++){
-        meanSum += IR[i]*i*MULTIPLIER;
-        sum += IR[i];
-    }
-    if (sum!=0){
-        proportional = meanSum/sum - SET_POINT;
-        integral += proportional;
-        differential = proportional - _proportional;
-        error = Kp*proportional+Ki*integral+Kd*differential;
-        _proportional = proportional;
-        return error/DIVIDER;
-    }
-    else{
-        return ERROR;
-    }
-}
-
 void PID_Init(){
-    PID1CON = 0b10000101;
-    PID1K1 = (unsigned short)(Kp + Ki*T + Kd/T);
-    PID1K2 = (unsigned short)(0 - (Kp + 2*Kd/T));
-    PID1K3 = (unsigned short)Kd/T;
-    PID1SET = SET_POINT;
+    PID1CON = 0x85;    
+    PID1K1H = (unsigned short) ((K1 & 0xFF00) >> 8);
+    PID1K1L = (unsigned short)  (K1 & 0x00FF);
+    PID1K2H = (unsigned short) ((K2 & 0xFF00) >> 8);
+    PID1K2L = (unsigned short)  (K2 & 0x00FF);
+    PID1K3H = (unsigned short) ((K3 & 0xFF00) >> 8);
+    PID1K3L = (unsigned short)  (K3 & 0x00FF);
 }
 
 uint GetPos(){
+    UpdateIR();
     static uint meanSum,sum,value;
     meanSum = sum = 0;
     for (char i = 0; i < 8; i++){
-        meanSum += IR[i]*i*MULTIPLIER;
-        sum += IR[i];
+        //meanSum += IR[i]*i*MULTIPLIER;
+        if(IR[i]){
+            meanSum += i<<2;
+            sum++;
+        }
     }
     if(sum==0){
         return (value<21?0:42);
@@ -63,23 +56,46 @@ uint GetPos(){
     return value;
 }
 
-long GetPID(){
-    
+long GetCorrection(){
     uint pos = GetPos();
-    PID1SETH = (uint)(SET_POINT >> 8);
-    PID1SETL = (uint)(SET_POINT & 0x00ff);
-    PID1INH = (uint)(pos >> 8);
-    PID1INL = (uint)(pos & 0x00ff);
+    
+    PID1SETH = (unsigned short)(SET_POINT >> 8);
+    PID1SETL = (unsigned short)(SET_POINT & 0x00ff);
+    
+    PID1INH = (unsigned short)(pos >> 8);
+    PID1INL = (unsigned short)(pos & 0x00ff);
     
     while(PID1CONbits.PID1BUSY);
     
     long value = PID1OUTHH;
     value <<= 8;
-    value = PID1OUTHL;
+    value |= PID1OUTHL;
     value <<= 8;
-    value = PID1OUTLH;
+    value |= PID1OUTLH;
     value <<= 8;
-    value = PID1OUTLL;
+    value |= PID1OUTLL;
+    
+    return value;
+}
+
+void StartPID(){
+    uint pos = GetPos();
+    
+    PID1SETH = (unsigned short)(SET_POINT >> 8);
+    PID1SETL = (unsigned short)(SET_POINT & 0x00ff);
+    
+    PID1INH = (unsigned short)(pos >> 8);
+    PID1INL = (unsigned short)(pos & 0x00ff);
+}
+
+long GetPID(){
+    long value = PID1OUTHH;
+    value <<= 8;
+    value |= PID1OUTHL;
+    value <<= 8;
+    value |= PID1OUTLH;
+    value <<= 8;
+    value |= PID1OUTLL;
     
     return value;
 }
