@@ -25,7 +25,7 @@ void main() {
             //Entry point for servo motor control using correction value obtained from PID
             
             
-            cycle ^= 1;
+            cycle = 0;
         }        
     }
 }
@@ -34,8 +34,7 @@ void interrupt ISR(){
     if(TMR0IF){
         
         //main routine timing (5ms)
-        cycle ^= 1;// when the cycle is not completed in 5ms, it will skip the next cycle;
-        //it it is yet not completed, the 2nd next cycle will not be skipped
+        if(!cycle)cycle=1;// when the cycle is not completed in 5ms, it will skip the next cycle;
         
         TMR0IF = 0;
         TMR0 = TMR0_INIT;

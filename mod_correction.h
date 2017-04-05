@@ -18,12 +18,12 @@ void UpdateIR(void);
 uint GetPos(void);
 long GetCorrection(void);
 
-void startPID(void);
+void StartPID(void);
 long GetPID(void);
 ////////////////////////////////////////////////////////////////////////////////
     
 //////CONFIGURATIONS////////////////////////////////////////////////////////////
-#define K1 2
+#define K1 3
 #define K2 -3
 #define K3 1
 #define DIVIDER 1

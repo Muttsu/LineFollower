@@ -6,15 +6,17 @@
 #include "config.h"
 
 #define MULTIPLIER //unused
-#define SET_POINT setPoint
+#define SET_POINT 7
 #define ERROR -1
 
 char IR[] = {0,0,0,0,0,0,0,0};
 char setPoint = 7;
 
 void Mod_Correction_Init(){
-    setPoint = GetPos();
+    PORTC=0;
+    UpdateIR();
     PID_Init();
+    PID1INH = 0;
 }
 
 void UpdateIR(){
@@ -45,14 +47,14 @@ uint GetPos(){
     for (char i = 0; i < 8; i++){
         //meanSum += IR[i]*i*MULTIPLIER;
         if(IR[i]){
-            meanSum += i<<2;
+            meanSum += i<<1;
             sum++;
         }
     }
-    if(sum==0){
-        return (value<21?0:42);
-    }
-    value = meanSum/sum;
+    if(sum==0)value = (value<7?0:14);
+    else if( sum==1)value = meanSum;
+    else if(sum==2)value = (meanSum>>1);
+    else value = meanSum/sum;
     return value;
 }
 
@@ -62,7 +64,7 @@ long GetCorrection(){
     PID1SETH = (unsigned short)(SET_POINT >> 8);
     PID1SETL = (unsigned short)(SET_POINT & 0x00ff);
     
-    PID1INH = (unsigned short)(pos >> 8);
+    //PID1INH not used
     PID1INL = (unsigned short)(pos & 0x00ff);
     
     while(PID1CONbits.PID1BUSY);
@@ -84,7 +86,7 @@ void StartPID(){
     PID1SETH = (unsigned short)(SET_POINT >> 8);
     PID1SETL = (unsigned short)(SET_POINT & 0x00ff);
     
-    PID1INH = (unsigned short)(pos >> 8);
+    //PID1INH = (unsigned short)(pos >> 8);
     PID1INL = (unsigned short)(pos & 0x00ff);
 }
 
