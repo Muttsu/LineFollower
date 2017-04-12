@@ -1,0 +1,16 @@
+/* 
+ * File:   mod_servo.h
+ * Author: Muutt
+ *
+ * Created on April 5, 2017, 9:31 AM
+ */
+
+#ifndef MOD_SERVO_H
+#define	MOD_SERVO_H
+
+//PROTOTYPES////////////////////////////////////////////////////////////////////
+void Servo_Init(void);
+////////////////////////////////////////////////////////////////////////////////
+
+#endif	/* MOD_SERVO_H */
+

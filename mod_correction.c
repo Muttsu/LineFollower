@@ -11,6 +11,7 @@
 
 char IR[] = {0,0,0,0,0,0,0,0};
 char setPoint = 7;
+long correction;
 
 void Mod_Correction_Init(){
     PORTC=0;
@@ -90,14 +91,13 @@ void StartPID(){
     PID1INL = (unsigned short)(pos & 0x00ff);
 }
 
-long GetPID(){
-    long value = PID1OUTHH;
-    value <<= 8;
-    value |= PID1OUTHL;
-    value <<= 8;
-    value |= PID1OUTLH;
-    value <<= 8;
-    value |= PID1OUTLL;
-    
-    return value;
+void UpdateCorrection(){
+    correction = 0;
+    correction = PID1OUTHH;
+    correction <<= 8;
+    correction |= PID1OUTHL;
+    correction <<= 8;
+    correction |= PID1OUTLH;
+    correction <<= 8;
+    correction |= PID1OUTLL;
 }
