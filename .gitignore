@@ -14,3 +14,7 @@ nbproject/private/
 *.mk
 
 *.properties
+
+mcc_generated_files/
+
+*.mc3

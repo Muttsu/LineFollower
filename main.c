@@ -9,11 +9,11 @@
 #include "config.h" //includes general configuration and declarations
 
 char cycle = 0;
-extern long correction;
 
 void main() {
     init(); //included in bsp.c
     Mod_Correction_Init();
+    Servo_Init();
     for(;;){
         if(cycle){
             //LATA5 = RC4;
@@ -22,9 +22,8 @@ void main() {
             if(!PID1CONbits.BUSY)UpdateCorrection();
             StartPID();
             
-            if(correction!=0)cycle = 0;
-            
             //Entry point for servo motor control using correction value obtained from PID
+            Drive();
             
             
             cycle = 0;

@@ -10,3 +10,7 @@ void init(){
     TRISA = 0;
     TRISC = 0xFF;
 }
+
+void TMR4_init(){
+    
+}

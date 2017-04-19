@@ -11,7 +11,7 @@
 
 char IR[] = {0,0,0,0,0,0,0,0};
 char setPoint = 7;
-long correction;
+signed long correction;
 
 void Mod_Correction_Init(){
     PORTC=0;
@@ -52,7 +52,7 @@ uint GetPos(){
             sum++;
         }
     }
-    if(sum==0)value = (value<7?0:14);
+    if(sum==0)value = 7;
     else if( sum==1)value = meanSum;
     else if(sum==2)value = (meanSum>>1);
     else value = meanSum/sum;
@@ -92,7 +92,6 @@ void StartPID(){
 }
 
 void UpdateCorrection(){
-    correction = 0;
     correction = PID1OUTHH;
     correction <<= 8;
     correction |= PID1OUTHL;
@@ -100,4 +99,5 @@ void UpdateCorrection(){
     correction |= PID1OUTLH;
     correction <<= 8;
     correction |= PID1OUTLL;
+    correction >>= DIVIDER;
 }
