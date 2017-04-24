@@ -11,9 +11,13 @@
 char cycle = 0;
 
 void main() {
-    init(); //included in bsp.c
+    
+    //Initiation process
+    B_init();
+    TMR3_init();
     Mod_Correction_Init();
     Servo_Init();
+    
     for(;;){
         if(cycle){
             //LATA5 = RC4;
@@ -22,7 +26,6 @@ void main() {
             if(!PID1CONbits.BUSY)UpdateCorrection();
             StartPID();
             
-            //Entry point for servo motor control using correction value obtained from PID
             Drive();
             
             
@@ -32,12 +35,12 @@ void main() {
 }
 
 void interrupt ISR(){
-    if(TMR0IF){
+    if(PIR5bits.TMR3IF){
         //main routine timing (5ms)
-        if(!cycle)cycle=1;
-        // when the cycle is not completed in 5ms, it will skip the next cycle;
+        cycle=1;
         
-        TMR0IF = 0;
-        TMR0 = TMR0_INIT;
+        TMR3H = TMR3H_INIT;
+        TMR3L = TMR3L_INIT;
+        PIR5bits.TMR3IF = 0;
     }
 }

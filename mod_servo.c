@@ -3,7 +3,7 @@
 void Servo_Init(){
     RA5PPS = 0b00001110;
     RA1PPS = 0b00001111;
-    TRISC |= 0b11000000;
+    //TRISC |= 0b11000000;
     PWM3CON = 0;
     PWM4CON = 0;
     PR2 = PERIOD2;
@@ -17,8 +17,9 @@ void Servo_Init(){
     T2CONbits.ON = 1;
     
     while(!TMR2IF);
-    TRISC &= 0b00111111;
-    PWM3CON |= 0b10000000;    
+    //TRISC &= 0b00111111;
+    PWM3CON |= 0b10000000;
+    PWM4CON |= 0b10000000;
 }
 
 void Drive(){
