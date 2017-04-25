@@ -8,6 +8,7 @@
       <itemPath>bsp.h</itemPath>
       <itemPath>mod_correction.h</itemPath>
       <itemPath>mod_servo.h</itemPath>
+      <itemPath>mod_ultrason.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -20,6 +21,7 @@
       <itemPath>bsp.c</itemPath>
       <itemPath>mod_correction.c</itemPath>
       <itemPath>mod_servo.c</itemPath>
+      <itemPath>mod_ultrason.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -39,7 +41,7 @@
         <targetDevice>PIC16F1619</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PKOBSKDEPlatformTool</platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.41</languageToolchainVersion>
         <platform>3</platform>

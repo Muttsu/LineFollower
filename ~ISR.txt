@@ -1,56 +1,54 @@
-/*
- * File:   main.c
- * Author: Muttsu
- *
- * Created on February 8, 2017, 5:49 PM
- * Main entry point with the main routine and ISR
+﻿/* Noms des coéquipiers
+ * NOM, Prénom      :  PHILIBERT,   Christophe
+ * NOM, Prénom      :  TELLIER,     Alexandre
+ * NOM, Prénom      :  ZHAO,        Jian Chen
+ * 
+ * Fichier          : main.c
+ * Date de création : 17 fév. 2017
+ * Microcontrôleur  : PIC16F1619, 32 MHz
+ * Description      :
  */
 
-#include "config.h" //includes general configuration and declarations
+#include "config.h"     // fusibles de configuration
+#include "bsp.h"        // pour la plaquette démo Curiosity
+#include "ultrason.h"  
+#include <stdint.h>
 
-char cycle = 0; //main routine semaphore
 
+
+// *** Définitions d'étiquettes (macros) ***
+
+#define DELAI_50MSEC    10
+#define DELAI_10MSEC    2
+
+#define TMR3H_INIT      99
+#define TMR3L_INIT      192
+
+
+
+// *** Variables globales ***
+
+
+// *** Prototypes ***
+void init(void);
+
+// *** Point d'entrée du programme ***
 void main() {
+    init();
     
-    //Initiation process
-    B_init();
-    TMR3_init();
-    ultrason_init();
-    Mod_Correction_Init();
-    Servo_Init();
-    
-    for(;;){
-        if(cycle){
-            
-            ultrason();
-         
-            //Correction module main routine
-            if(!PID1CONbits.BUSY)UpdateCorrection();
-            StartPID();
-            
-            Drive();
-            
-            
-            cycle = 0;
-        }        
+    for(;;)
+    {
+        ultrason();
     }
 }
 
-void interrupt ISR(){
-    //main routine timing (5ms)
-    if(PIR5bits.TMR3IF){
-        //main routine timing (5ms)
-        cycle=1;
-        
-        TMR3H = TMR3H_INIT;
-        TMR3L = TMR3L_INIT;
-        PIR5bits.TMR3IF = 0;
-    }
+// *** Routine d'interruption matérielle ***
+void interrupt ISR() {
     
-    //ultrasound routine timing
     static char etape = 0;
     static char pulse = 0;
     static char att_ult = 0;
+    
     if(IOCIF)                           //interruption sur la broche RC3
     {
         if(!etape)                      //comencement de la prise du temps du pulse
@@ -88,4 +86,25 @@ void interrupt ISR(){
         TMR3H = TMR3H_INIT;                                                     
         TMR3L = TMR3L_INIT;                                                     
     }
+   
+    
 }
+
+// *** Initialisations générales ***
+void init() {
+    OSCCON = 0b11110000;
+    bsp_init(); 
+    
+    init_ultrason();
+    
+    T3CON = 0b00000001;
+    TMR3IE = 1;
+    
+    TMR3H = TMR3H_INIT;
+    TMR3L = TMR3L_INIT;
+    
+    INTCON = 0b11001000;        //PEIE + GIE + interruption sur les broches
+    
+}
+
+// *** Autres fonctions ***

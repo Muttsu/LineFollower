@@ -5,12 +5,23 @@
 
 #include "config.h"
 
-#define MULTIPLIER //unused
-#define SET_POINT 7
-#define ERROR -1
+#define SET_POINT 7                     //ne pas changer
 
-char IR[] = {0,0,0,0,0,0,0,0};
-char setPoint = 7;
+//char IR[] = {0,0,0,0,0,0,0,0};
+union{
+    struct{
+        unsigned b0:1;
+        unsigned b1:1;
+        unsigned b2:1;
+        unsigned b3:1;
+        unsigned b4:1;
+        unsigned b5:1;
+        unsigned b6:1;
+        unsigned b7:1;
+    };
+    char value;
+}IR;
+
 signed long correction;
 
 void Mod_Correction_Init(){
@@ -23,33 +34,33 @@ void Mod_Correction_Init(){
 }
 
 void PID_Init(){
-    PID1CON = 0x85;    
-    PID1K1H = (unsigned short) ((K1 & 0xFF00) >> 8);
-    PID1K1L = (unsigned short)  (K1 & 0x00FF);
-    PID1K2H = (unsigned short) ((K2 & 0xFF00) >> 8);
-    PID1K2L = (unsigned short)  (K2 & 0x00FF);
-    PID1K3H = (unsigned short) ((K3 & 0xFF00) >> 8);
-    PID1K3L = (unsigned short)  (K3 & 0x00FF);
+    PID1CON = 0x85;
+    PID1K1H = (unsigned char) ((K1 & 0xFF00) >> 8);
+    PID1K1L = (unsigned char)  (K1 & 0x00FF);
+    PID1K2H = (unsigned char) ((K2 & 0xFF00) >> 8);
+    PID1K2L = (unsigned char)  (K2 & 0x00FF);
+    PID1K3H = (unsigned char) ((K3 & 0xFF00) >> 8);
+    PID1K3L = (unsigned char)  (K3 & 0x00FF);
 }
 
 void UpdateIR(){
-    IR[0] = IR0;
-    IR[1] = IR1;
-    IR[2] = IR2;
-    IR[3] = IR3;
-    IR[4] = IR4;
-    IR[5] = IR5;
-    IR[6] = IR6;
-    IR[7] = IR7;
+    IR.b0 = IR0;
+    IR.b1 = IR1;
+    IR.b2 = IR2;
+    IR.b3 = IR3;
+    IR.b4 = IR4;
+    IR.b5 = IR5;
+    IR.b6 = IR6;
+    IR.b7 = IR7;
 }
 
 uint GetPos(){
     UpdateIR();
-    static uint meanSum,sum,value;
+    static unsigned int meanSum,sum,value;
     meanSum = sum = 0;
     for (char i = 0; i < 8; i++){
         //meanSum += IR[i]*i*MULTIPLIER;
-        if(IR[i]){
+        if((IR.value>>i)&1){
             meanSum += i<<1;
             sum++;
         }
@@ -86,7 +97,7 @@ uint GetPos(){
 //}
 
 void StartPID(){
-    uint pos = GetPos();
+    unsigned int pos = GetPos();
     
     PID1SETH = (unsigned short)(SET_POINT >> 8);
     PID1SETL = (unsigned short)(SET_POINT & 0x00ff);
