@@ -23,9 +23,6 @@ void main() {
     
     for(;;){
         if(cycle){
-        
-            
-            
             mod_ultrason();
          
             mod_motor();
