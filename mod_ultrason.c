@@ -51,8 +51,7 @@ void mod_ultrason_init()
 void analyse_distance()
 {
     temps_ultrason = (TMR5L | (TMR5H<<8)); 
-    distance_objet = temps_ultrason/57/8;   //Le 57 est donnée dans la fiche technique du capteur, le 8 viens du cycle d'horloge 
-    mesure_ultrason_done = 0;  
+    distance_objet = ((temps_ultrason/57)>>3);   //Le 57 est donnée dans la fiche technique du capteur, le 8 viens du cycle d'horloge  
     attente_ultrason = 1;                   //Attente pour le bon fonctionnement du capteur
 }
 

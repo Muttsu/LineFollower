@@ -62,7 +62,7 @@ void mod_couleur_init(){
     S2 = 1;
     S3 = 0;
     
-    T1CKIPPS = 0b00010110;
+    T1CKIPPS = 0b00000010;
     
     T1CON = 0b10000001;
     

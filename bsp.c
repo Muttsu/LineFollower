@@ -5,6 +5,7 @@ void init(){
     OPTION_REG = 0b11010000;
     INTCONbits.GIE=1;
     INTCONbits.PEIE=1;
+    INTCONbits.IOCIE = 1;
     
     ANSELA = 0;         //toutes les broches en analogique
     ANSELB = 0;
