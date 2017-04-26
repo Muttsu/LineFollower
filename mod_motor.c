@@ -1,6 +1,6 @@
 #include "config.h"
 
-void Servo_Init(){
+void mod_motor_init(){
     RA5PPS = 0b00001110;
     RA1PPS = 0b00001111;
     //TRISC |= 0b11000000;
@@ -12,7 +12,7 @@ void Servo_Init(){
     PWM4DCH = 0;
     PWM4DCL &= 0b00111111;
     
-    PIR1bits.TMR2IF = 0; 
+    PIR1bits.TMR2IF = 0b0; 
     T2CONbits.CKPS = 0b000;
     T2CONbits.ON = 1;
     
@@ -22,7 +22,7 @@ void Servo_Init(){
     PWM4CON |= 0b10000000;
 }
 
-void Drive(){
+void drive(){
     extern signed long correction;
     signed long value = (correction<-512?-512:(correction>512?512:correction));
     unsigned int s = DUTY_CYCLE_SET_POINT + value;
@@ -31,4 +31,13 @@ void Drive(){
     PWM3DCL = (unsigned short)((s&0b11)<<6);
     PWM4DCH = (unsigned short)(t>>2);
     PWM4DCL = (unsigned short)((t&0b11)<<6);
+}
+
+void mod_motor(){
+    //Correction module main routine
+    if(!PID1CONbits.BUSY)UpdateCorrection();
+    StartPID();
+
+    //Update PWM Duty cycle
+    drive();
 }

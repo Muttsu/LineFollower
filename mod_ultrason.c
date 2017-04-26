@@ -1,9 +1,3 @@
-﻿/* Fichier          : ultrason.c
- * Auteur           : PHILIBERT, Christophe
- * Date de creation : 17 fev. 2017
- * Microcontroleur  : PIC16F1619, 32 MHz
- * Description      : Code pour le capteur ultrason HC-SR04
- */
 #include "mod_ultrason.h"
 #include "config.h"
 
@@ -16,8 +10,25 @@ unsigned int temps_ultrason;
 char distance_objet;
 
 // *** Initialisations générales ***
-void ultrason()
+void mod_ultrason()
 {
+    //timing
+    static char pulse = 0;
+    static char att_ult = 0;    
+    if(attente_pulse && (++pulse == DELAI_10MSEC))       // attente de 10ms pour le pulse en début d'analyse de distance                   
+    {
+        T_US = 0;                                                           
+        lancer_mesure_ultrason = 1;                                         
+        attente_pulse = 0;                                                  
+        pulse = 0;                                                          
+    }
+    if(attente_ultrason && (++att_ult == DELAI_50MSEC))  //attente obligatoire pour le bon fonctionnement du capteur              
+    {
+        lancer_mesure_ultrason = 1;                                         
+        attente_ultrason = 0;                                               
+        att_ult = 0;                                                        
+    }
+    
     if(lancer_mesure_ultrason)
     {
         pulse_time();
@@ -25,16 +36,17 @@ void ultrason()
     else if(mesure_ultrason_done)
     {
         analyse_distance();
+        mesure_ultrason_done = 0;
     }
 }
 
-void ultrason_init()
+void mod_ultrason_init()
 {
-    TRISC3 = 1;         //Broche sur laquelle je reçois le signal du capteur
+    TRISB7 = 1;         //Broche sur laquelle je reçois le signal du capteur
     TRISB6 = 0;         //Broche sur laquelle j'envoi le signal pour démarrer l'analyse de distance
     
-    IOCCN3 = 1;         //Interruption sur le front haut et bas de la broche RC3
-    IOCCP3 = 1;
+    IOCBN7 = 1;         //Interruption sur le front haut et bas de la broche RC3
+    IOCBP7 = 1;
 }
 
 void analyse_distance()
@@ -49,7 +61,7 @@ void pulse_time()
 {
     TMR5H = 0;
     TMR5L = 0;
-    TRIG = 1;                               //début du pulse pour engager la prise de donnée
+    T_US = 1;                               //début du pulse pour engager la prise de donnée
     attente_pulse = 1;                      //annonce l'attente de au moins 10us
     lancer_mesure_ultrason = 0;             
 }

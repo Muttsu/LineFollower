@@ -7,8 +7,8 @@
       <itemPath>config.h</itemPath>
       <itemPath>bsp.h</itemPath>
       <itemPath>mod_correction.h</itemPath>
-      <itemPath>mod_servo.h</itemPath>
       <itemPath>mod_ultrason.h</itemPath>
+      <itemPath>mod_motor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -20,8 +20,8 @@
       <itemPath>main.c</itemPath>
       <itemPath>bsp.c</itemPath>
       <itemPath>mod_correction.c</itemPath>
-      <itemPath>mod_servo.c</itemPath>
       <itemPath>mod_ultrason.c</itemPath>
+      <itemPath>mod_motor.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -43,7 +43,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>1.41</languageToolchainVersion>
+        <languageToolchainVersion>1.40</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -207,7 +207,7 @@
         <property key="codecoverage.outputfile" value=""/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>
-        <property key="oscillator.frequency" value="1"/>
+        <property key="oscillator.frequency" value="8"/>
         <property key="oscillator.frequencyunit" value="Mega"/>
         <property key="oscillator.rcfrequency" value="250"/>
         <property key="oscillator.rcfrequencyunit" value="Kilo"/>

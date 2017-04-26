@@ -12,7 +12,7 @@
 
 
 //PROTOTYPES////////////////////////////////////////////////////////////////////
-void Mod_Correction_Init(void);
+void mod_correction_init(void);
 void PID_Init(void);
 
 void UpdateIR(void);

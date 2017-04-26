@@ -2,8 +2,7 @@
 #define	MOD_ULTRASON_H
 
 // *** Définitions d'étiquettes (macros) ***
-
-#define TRIG            RB6  
+  
 #define DELAI_50MSEC    10
 #define DELAI_10MSEC    2
 #define TMR5L_INIT      0
@@ -19,8 +18,8 @@ extern char distance_objet;
 
 // *** Prototypes ***
 void analyse_distance(void);
-void ultrason_init(void);
+void mod_ultrason_init(void);
 void pulse_time(void);
-void ultrason(void);
+void mod_ultrason(void);
 
 #endif	/* MOD_ULTRASON_H */

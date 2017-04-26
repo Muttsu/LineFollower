@@ -24,7 +24,7 @@ union{
 
 signed long correction;
 
-void Mod_Correction_Init(){
+void mod_correction_init(){
     ANSELC = 0;
     TRISC = 0xFF;
     PORTC=0;
