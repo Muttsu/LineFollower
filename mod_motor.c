@@ -23,7 +23,6 @@ void mod_motor_init(){
 }
 
 void drive(){
-    extern signed long correction;
     signed long value = (correction<-512?-512:(correction>512?512:correction));
     unsigned int s = DUTY_CYCLE_SET_POINT + value;
     unsigned int t = DUTY_CYCLE_SET_POINT - value;
@@ -32,12 +31,43 @@ void drive(){
     PWM4DCH = (unsigned short)(t>>2);
     PWM4DCL = (unsigned short)((t&0b11)<<6);
 }
+void stop(){
+    PWM3DCH = (unsigned short)0;
+    PWM3DCL = (unsigned short)0;
+    PWM4DCH = (unsigned short)0;
+    PWM4DCL = (unsigned short)0;
+}
+void slow_drive(){
+    signed long value = ((correction<-512?-512:(correction>512?512:correction))>>2);
+    unsigned int s = DUTY_CYCLE_SLOW_MODE + value;
+    unsigned int t = DUTY_CYCLE_SLOW_MODE - value;
+    PWM3DCH = (unsigned short)(s>>2);
+    PWM3DCL = (unsigned short)((s&0b11)<<6);
+    PWM4DCH = (unsigned short)(t>>2);
+    PWM4DCL = (unsigned short)((t&0b11)<<6);
+}
 
-void mod_motor(){
-    //Correction module main routine
-    if(!PID1CONbits.BUSY)UpdateCorrection();
-    StartPID();
-
-    //Update PWM Duty cycle
-    drive();
+void mod_motor(){  
+    switch(sign){
+        case 1:
+            //BLEU;
+            slow_drive();
+            break;
+        case 2:
+            //VERT;
+            //NON IMPLEMENTE
+            break;
+        case 3:
+            //ROUGE;
+            stop();
+            break;
+        default:
+            //Correction module main routine
+            if(!PID1CONbits.BUSY)UpdateCorrection();
+            StartPID();
+           
+            //Update PWM Duty cycle
+            drive();
+    }
+    
 }

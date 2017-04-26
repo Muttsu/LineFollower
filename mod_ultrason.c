@@ -1,4 +1,3 @@
-#include "mod_ultrason.h"
 #include "config.h"
 
 char lancer_mesure_ultrason = 1;            //Sémaphore pour lancer la mesure de la distance   

@@ -23,7 +23,9 @@ long GetCorrection(void); //do not use, for tests only
 void StartPID(void);
 void UpdateCorrection(void);
 ////////////////////////////////////////////////////////////////////////////////
-    
+
+extern long correction;
+
 //////CONFIGURATIONS////////////////////////////////////////////////////////////
 #define K1 201      //default: 201
 #define K2 -401     //default: -401

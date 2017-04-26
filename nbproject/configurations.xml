@@ -9,6 +9,7 @@
       <itemPath>mod_correction.h</itemPath>
       <itemPath>mod_ultrason.h</itemPath>
       <itemPath>mod_motor.h</itemPath>
+      <itemPath>mod_couleur.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -22,6 +23,7 @@
       <itemPath>mod_correction.c</itemPath>
       <itemPath>mod_ultrason.c</itemPath>
       <itemPath>mod_motor.c</itemPath>
+      <itemPath>mod_couleur.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

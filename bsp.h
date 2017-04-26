@@ -29,6 +29,10 @@
 
 #define T_US    RB6
 #define C_US    RB7
+
+#define S2          LATA0
+#define S3          LATA1
+#define out         RA2
 ////////////////////////////////////////////////////////////////////////////////
 
 void init(void);

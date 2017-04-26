@@ -60,6 +60,7 @@
 #include "mod_correction.h"
 #include "mod_motor.h"
 #include "mod_ultrason.h"
+#include "mod_couleur.h"
 #include <xc.h>
     
 

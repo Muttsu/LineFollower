@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <xc.h>
-
 #include "config.h"
 
 #define SET_POINT 7                     //ne pas changer

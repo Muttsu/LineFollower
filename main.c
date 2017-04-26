@@ -19,6 +19,7 @@ void main() {
     mod_ultrason_init();
     mod_correction_init();
     mod_motor_init();
+    mod_couleur_init();
     
     for(;;){
         if(cycle){
@@ -29,6 +30,7 @@ void main() {
          
             mod_motor();
             
+            mod_couleur();
             
             //End cycle
             cycle = 0;
@@ -56,5 +58,15 @@ void interrupt ISR(){
         
         IOCIF = 0;
         IOCCF3 = 0;
+    }
+    
+    
+    //color sensor routine timing
+    if(TMR1GIF){
+        t = (TMR1H << 8) | TMR1L;
+        Couleur = 1;
+        TMR1H = 0;
+        TMR1L = 0;
+        TMR1GIF = 0;
     }
 }
