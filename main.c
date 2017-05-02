@@ -13,7 +13,7 @@ bit cycle = 0; //main routine semaphore
 void main() {
     
     //Initiation process
-    init();
+    bsp_init();
     TMR3_init();
     
     mod_ultrason_init();
@@ -24,10 +24,11 @@ void main() {
     for(;;){
         if(cycle){
             mod_ultrason();
-         
-            mod_motor();
             
             mod_couleur();
+         
+            mod_motor();
+            //la routine de correction est incluse dans mod_motor()
             
             //End cycle
             cycle = 0;
@@ -48,22 +49,22 @@ void interrupt ISR(){
     
     
     //ultrasound routine timing
-    if(IOCIF)                           //interruption sur la broche RC3
+    if(INTCONbits.IOCIF)                           //interruption sur la broche RB3
     {
         if (!mesure_ultrason_done)T5CONbits.TMR5ON ^= 1;
         if (!T5CONbits.TMR5ON) mesure_ultrason_done = 1;
         
-        IOCIF = 0;
-        IOCCF3 = 0;
+        INTCONbits.IOCIF = 0;
+        IOCBFbits.IOCBF7 = 0;
     }
     
     
     //color sensor routine timing
-    if(TMR1GIF){
+    if(PIR1bits.TMR1GIF){
         t = (TMR1H << 8) | TMR1L;
         Couleur = 1;
         TMR1H = 0;
         TMR1L = 0;
-        TMR1GIF = 0;
+        PIR1bits.TMR1GIF = 0;
     }
 }

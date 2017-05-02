@@ -1,6 +1,6 @@
 #include "config.h"
 
-#define SET_POINT 7                     //ne pas changer
+#define SET_POINT 7
 
 //char IR[] = {0,0,0,0,0,0,0,0};
 union{
@@ -20,12 +20,11 @@ union{
 signed long correction;
 
 void mod_correction_init(){
-    ANSELC = 0;
+    ANSELC = 0x00;
     TRISC = 0xFF;
-    PORTC=0;
+    PORTC = 0x00;
     UpdateIR();
     PID_Init();
-    PID1INH = 0;
 }
 
 void PID_Init(){
@@ -60,48 +59,41 @@ uint GetPos(){
             sum++;
         }
     }
-    if(sum==0)value = 7;
-    else if (sum==1)value = meanSum;
-    else if (sum==2)value = (meanSum>>1);
-    else if (sum==4)value = (meanSum>>2);
-    else if (sum==8)value = (meanSum>>3);
-    else value = meanSum/sum;
+    //au lieu de faire des divisions:
+    switch(sum){
+        case 0:
+            value = 7;      //le 7 est la valeur du milieu
+            break;
+        case 1:
+            value = meanSum;
+            break;
+        case 2:
+            value = (meanSum >> 1);
+            break;
+        case 4:
+            value = (meanSum >> 2);
+            break;
+        case 8:
+            value = (meanSum >> 3);
+            break;
+        default:
+            value = meanSum/sum;
+            break;
+    }
     return value;
 }
 
-//long GetCorrection(){
-//    uint pos = GetPos();
-//    
-//    PID1SETH = (unsigned short)(SET_POINT >> 8);
-//    PID1SETL = (unsigned short)(SET_POINT & 0x00ff);
-//    
-//    //PID1INH not used
-//    PID1INL = (unsigned short)(pos & 0x00ff);
-//    
-//    while(PID1CONbits.PID1BUSY);
-//    
-//    long value = PID1OUTHH;
-//    value <<= 8;
-//    value |= PID1OUTHL;
-//    value <<= 8;
-//    value |= PID1OUTLH;
-//    value <<= 8;
-//    value |= PID1OUTLL;
-//    
-//    return value;
-//}
-
-void StartPID(){
+void StartPID(){                //Mis a nouveau des PID1IN
     unsigned int pos = GetPos();
     
-    PID1SETH = (unsigned short)(SET_POINT >> 8);
-    PID1SETL = (unsigned short)(SET_POINT & 0x00ff);
+    PID1SETH = (unsigned short)(7 >> 8);
+    PID1SETL = (unsigned short)(7 & 0x00ff);
     
     //PID1INH = (unsigned short)(pos >> 8);
     PID1INL = (unsigned short)(pos & 0x00ff);
 }
 
-void UpdateCorrection(){
+void UpdateCorrection(){        //Mis a nouveau de la correction
     correction = PID1OUTHH;
     correction <<= 8;
     correction |= PID1OUTHL;

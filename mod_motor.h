@@ -8,6 +8,8 @@
 #ifndef MOD_MOTOR_H
 #define	MOD_MOTOR_H
 
+extern unsigned char state;
+
 //PROTOTYPES////////////////////////////////////////////////////////////////////
 void mod_motor_init(void);
 void drive(void);
@@ -17,9 +19,9 @@ void slow_drive(void);
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
-#define PERIOD2 0xff  //63 corresponds to duty cycle ratio resolution of 256
-#define DUTY_CYCLE_SET_POINT 512
-#define DUTY_CYCLE_SLOW_MODE 128
+#define PERIOD2 0xff    //maximum resolution
+#define DCSP 512        //Duty cycle set point
+#define DCSMSP 128      //Duty cycle slow mode set point
 ////////////////////////////////////////////////////////////////////////////////
 
 #endif	/* MOD_SERVO_H */

@@ -2,20 +2,12 @@
 #define	COULEUR_H
 
 extern char Couleur;
-extern char n;
 extern unsigned int t;
-extern unsigned int freq_1;
-extern unsigned int freq_2;
-extern unsigned int freq_3;
-extern unsigned int freq_4;
-extern float rouge;
-extern float bleu;
-extern float vert;
-
-extern char sign;
 
 void mod_couleur_init(void);
-void selection_filtre(int a);
+void selection_filtre(int n);
 void mod_couleur(void);
+
+#define ERROR_STATE 0//le mode des moteurs lorsquil y a une erreur a la detection des couleurs
 
 #endif	/* COULEUR_H */

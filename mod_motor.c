@@ -1,54 +1,72 @@
 #include "config.h"
 
-void mod_motor_init(){
-    RA5PPS = 0b00001110;
-    RA1PPS = 0b00001111;
-    //TRISC |= 0b11000000;
+unsigned char state;
+//state designe le mode des moteurs
+//0: vitesse normale
+//1: vitesse lente
+//2: non implemente
+//3: stop
+
+void mod_motor_init(){      //procesus obtenu de la fiche de documentation
+    RB4PPS = 0b00001110;
+    RB5PPS = 0b00001111;
+    TRISBbits.TRISB4 = 1;
+    TRISBbits.TRISB5 = 1;
     PWM3CON = 0;
     PWM4CON = 0;
     PR2 = PERIOD2;
-    PWM3DCH = 0;
-    PWM3DCL &= 0b00111111;
-    PWM4DCH = 0;
-    PWM4DCL &= 0b00111111;
+    PWM3DCH = 0x00;
+    PWM3DCL = 0x00;
+    PWM4DCH = 0x00;
+    PWM4DCL = 0x00;
     
     PIR1bits.TMR2IF = 0b0; 
     T2CONbits.CKPS = 0b000;
     T2CONbits.ON = 1;
     
-    while(!TMR2IF);
-    //TRISC &= 0b00111111;
-    PWM3CON |= 0b10000000;
-    PWM4CON |= 0b10000000;
+    while(!TMR2IF);         //attendre TMR2IF=1; il ne faut pas que TMR2 cause une interruption
+    TRISBbits.TRISB4 = 0;
+    TRISBbits.TRISB5 = 0;
+    PWM3CONbits.EN = 1;
+    PWM4CONbits.EN = 1;
 }
 
 void drive(){
-    signed long value = (correction<-512?-512:(correction>512?512:correction));
-    unsigned int s = DUTY_CYCLE_SET_POINT + value;
-    unsigned int t = DUTY_CYCLE_SET_POINT - value;
-    PWM3DCH = (unsigned short)(s>>2);
-    PWM3DCL = (unsigned short)((s&0b11)<<6);
-    PWM4DCH = (unsigned short)(t>>2);
-    PWM4DCL = (unsigned short)((t&0b11)<<6);
+    signed long value = (correction<-DCSP?-DCSP:(correction>DCSP?DCSP:correction));
+    unsigned int l = DCSP + value;
+    unsigned int r = DCSP - value;
+    PWM3DCH = (unsigned short)(l >> 2);
+    PWM3DCL = (unsigned short)((l & 0b11) << 6);
+    PWM4DCH = (unsigned short)(r >> 2);
+    PWM4DCL = (unsigned short)((r & 0b11) << 6);
 }
 void stop(){
-    PWM3DCH = (unsigned short)0;
-    PWM3DCL = (unsigned short)0;
-    PWM4DCH = (unsigned short)0;
-    PWM4DCL = (unsigned short)0;
+    PWM3DCH = 0x00;
+    PWM3DCL = 0x00;
+    PWM4DCH = 0x00;
+    PWM4DCL = 0x00;
 }
 void slow_drive(){
-    signed long value = ((correction<-512?-512:(correction>512?512:correction))>>2);
-    unsigned int s = DUTY_CYCLE_SLOW_MODE + value;
-    unsigned int t = DUTY_CYCLE_SLOW_MODE - value;
-    PWM3DCH = (unsigned short)(s>>2);
-    PWM3DCL = (unsigned short)((s&0b11)<<6);
-    PWM4DCH = (unsigned short)(t>>2);
-    PWM4DCL = (unsigned short)((t&0b11)<<6);
+    signed long value = (correction<-DCSMSP?-DCSMSP:(correction>DCSMSP?DCSMSP:correction));
+    unsigned int l = DCSMSP + value;
+    unsigned int r = DCSMSP - value;
+    PWM3DCH = (unsigned short)(l >> 2);
+    PWM3DCL = (unsigned short)((l & 0b11) << 6);
+    PWM4DCH = (unsigned short)(r >> 2);
+    PWM4DCL = (unsigned short)((r & 0b11) << 6);
 }
 
 void mod_motor(){  
-    switch(sign){
+    switch(state){
+        case 0:
+            drive();
+            
+            //Correction module main routine
+            //Uses mod_correction
+            if(!PID1CONbits.BUSY)UpdateCorrection();
+            StartPID();
+            
+            break;
         case 1:
             //BLEU;
             slow_drive();
@@ -62,12 +80,6 @@ void mod_motor(){
             stop();
             break;
         default:
-            //Correction module main routine
-            if(!PID1CONbits.BUSY)UpdateCorrection();
-            StartPID();
-           
-            //Update PWM Duty cycle
-            drive();
+            break;
     }
-    
 }

@@ -9,6 +9,7 @@
 #define	MOD_CORRECTION_H
 
 
+extern long correction;
 
 
 //PROTOTYPES////////////////////////////////////////////////////////////////////
@@ -18,13 +19,9 @@ void PID_Init(void);
 void UpdateIR(void);
 uint GetPos(void);
 
-long GetCorrection(void); //do not use, for tests only
-
 void StartPID(void);
 void UpdateCorrection(void);
 ////////////////////////////////////////////////////////////////////////////////
-
-extern long correction;
 
 //////CONFIGURATIONS////////////////////////////////////////////////////////////
 #define K1 201      //default: 201

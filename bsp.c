@@ -1,6 +1,6 @@
 #include "config.h"
 
-void init(){
+void bsp_init(){
     OSCCON = 0b11110000;
     OPTION_REG = 0b11010000;
     INTCONbits.GIE=1;
@@ -11,12 +11,12 @@ void init(){
     ANSELB = 0;
     ANSELC = 0;
     TRISA = 0xff;       //toutes les broches en entrée
-    TRISA = 0xff;
+    TRISB = 0xff;
     TRISC = 0xff;
 }
 
 void TMR3_init(){
-    //T3CONbits.TMR3CS = 0b00;
+    T3CONbits.TMR3CS = 0b00;
     T3CONbits.T3CKPS = 0b00;
     T3CONbits.T3SYNC = 0b0;
     T3CONbits.TMR3ON = 0b1;

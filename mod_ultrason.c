@@ -41,11 +41,11 @@ void mod_ultrason()
 
 void mod_ultrason_init()
 {
-    TRISB7 = 1;         //Broche sur laquelle je reçois le signal du capteur
-    TRISB6 = 0;         //Broche sur laquelle j'envoi le signal pour démarrer l'analyse de distance
+    TRISBbits.TRISB7 = 1;         //Broche sur laquelle je reçois le signal du capteur
+    TRISBbits.TRISB6 = 0;         //Broche sur laquelle j'envoi le signal pour démarrer l'analyse de distance
     
-    IOCBN7 = 1;         //Interruption sur le front haut et bas de la broche RC3
-    IOCBP7 = 1;
+    IOCBNbits.IOCBN7 = 1;         //Interruption sur le front haut et bas de la broche RB7
+    IOCBPbits.IOCBP7 = 1;
 }
 
 void analyse_distance()
@@ -53,6 +53,8 @@ void analyse_distance()
     temps_ultrason = (TMR5L | (TMR5H<<8)); 
     distance_objet = ((temps_ultrason/57)>>3);   //Le 57 est donnée dans la fiche technique du capteur, le 8 viens du cycle d'horloge  
     attente_ultrason = 1;                   //Attente pour le bon fonctionnement du capteur
+    
+    if(distance_objet <= 30)state = 1;
 }
 
 void pulse_time()
