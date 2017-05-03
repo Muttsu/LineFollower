@@ -5,6 +5,7 @@ unsigned int t = 0;
 void mod_couleur() {
     static unsigned int freq_1,freq_2,freq_3,freq_4;
     static float rouge,bleu,vert;
+    static char t_blanc,t_rouge,t_bleu,t_vert;
     static char n = 0;
     
     switch(n){
@@ -20,22 +21,33 @@ void mod_couleur() {
         case 3:
             freq_4 = t;
 
+            t_blanc<<=1;
+            t_rouge<<=1;
+            t_bleu<<=1;
+            t_vert<<=1;
+            
             bleu = freq_2 * 100.0f /freq_1;
             rouge = freq_3 * 100.0f /freq_1;
             vert = freq_4 * 100.0f /freq_1;
             if(rouge > 105 && rouge < 140 && bleu > 105 && bleu < 140 && vert < 100){
-                state = 0;//BLANC
+                t_blanc|=0b1;//BLANC
             } 
             if(bleu > 140 && rouge > 140){//0.35
-                state = 1;//BLEU
+                t_bleu|=0b1;//BLEU
             }
             if(rouge < 90 && bleu < 90){//0.35
-                state = 2;//VERT
+                t_vert|=0b1;//VERT
             }
             if(rouge > 95 && rouge < 105 && bleu > 95 && bleu < 105 && vert < 105){//0.6
-                state = 3;//ROUGE
+                t_rouge|=0b1;//ROUGE
             }
             else state = ERROR_STATE;
+            
+            if((t_rouge|0xf0)==0xff) state=0;
+            else if((t_bleu|0xf0)==0xff) state=1;
+            else if((t_vert|0xf0)==0xff) state=2;
+            else if((t_blanc|0xf0)==0xff) state=2;
+            else state=2;
 
             break;
     }
