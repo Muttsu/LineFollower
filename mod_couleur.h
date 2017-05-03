@@ -1,7 +1,6 @@
 #ifndef COULEUR_H
 #define	COULEUR_H
 
-extern char Couleur;
 extern unsigned int t;
 
 void mod_couleur_init(void);
