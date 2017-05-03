@@ -27,6 +27,11 @@ void main() {
         
         if(cycle){//routine principale
             mod_ultrason();
+            
+            //Correction module main routine
+            //Uses mod_correction
+            if(!PID1CONbits.BUSY)UpdateCorrection();
+            StartPID();
          
             mod_motor();
             //la routine de correction est incluse dans mod_motor()

@@ -12,8 +12,10 @@ void mod_motor_init(){      //procesus obtenu de la fiche de documentation
     RA5PPS = 0b00001110;    //DEL4
     RA1PPS = 0b00001111;
     RB5PPS = 0b00001111;    //DEL5
-    TRISBbits.TRISB4 = 1;
-    TRISBbits.TRISB5 = 1;
+    TRISAbits.TRISA5 = 0b0;
+    TRISAbits.TRISA1 = 0b0;
+    TRISBbits.TRISB4 = 0b1;
+    TRISBbits.TRISB5 = 0b1;
     PWM3CON = 0;
     PWM4CON = 0;
     PR2 = PERIOD2;
@@ -63,19 +65,17 @@ void mod_motor(){
         case 0:
             drive();
             
-            //Correction module main routine
-            //Uses mod_correction
-            if(!PID1CONbits.BUSY)UpdateCorrection();
-            StartPID();
-            
             break;
         case 1:
             //BLEU;
             slow_drive();
+            if(!PID1CONbits.BUSY)UpdateCorrection();
+            StartPID();
             break;
         case 2:
             //VERT;
-            //NON IMPLEMENTE
+            drive();
+            
             break;
         case 3:
             //ROUGE;
