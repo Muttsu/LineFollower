@@ -54,12 +54,12 @@ void mod_couleur_init(){
     OSCCON = 0b11110000;
     OPTION_REG = 0b11010101;
     
-    TRISAbits.TRISA0 = 0b0;
-    TRISAbits.TRISA1 = 0b0;
+    TRISAbits.TRISA2 = 0b0;
+    TRISAbits.TRISA3 = 0b0;
     selection_filtre(0);
     
-    TRISAbits.TRISA2 = 1;
-    T1CKIPPS = 0b00000010;
+    TRISAbits.TRISA0 = 1;
+    T1CKIPPS = 0b00000000;
     
     T1CON = 0b10000001;
     

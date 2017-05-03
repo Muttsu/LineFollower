@@ -9,7 +9,9 @@ unsigned char state;
 
 void mod_motor_init(){      //procesus obtenu de la fiche de documentation
     RB4PPS = 0b00001110;
-    RB5PPS = 0b00001111;
+    RA5PPS = 0b00001110;    //DEL4
+    RA1PPS = 0b00001111;
+    RB5PPS = 0b00001111;    //DEL5
     TRISBbits.TRISB4 = 1;
     TRISBbits.TRISB5 = 1;
     PWM3CON = 0;
