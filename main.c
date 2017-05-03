@@ -22,10 +22,11 @@ void main() {
     mod_couleur_init();
     
     for(;;){
-        if(cycle){
-            mod_ultrason();
             
-            mod_couleur();
+        if(Couleur)mod_couleur();//routine pour capturer la couleur
+        
+        if(cycle){//routine principale
+            mod_ultrason();
          
             mod_motor();
             //la routine de correction est incluse dans mod_motor()
