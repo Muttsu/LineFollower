@@ -1,6 +1,5 @@
 #include "config.h"
 
-char Couleur = 0;
 unsigned int t = 0;
 
 void mod_couleur() {
@@ -40,9 +39,6 @@ void mod_couleur() {
 
             break;
     }
-
-    Couleur = 0;
-
     n++;
     if(n == 4) n = 0;
     selection_filtre(n);

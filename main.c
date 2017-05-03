@@ -9,6 +9,7 @@
 #include "config.h" //includes general configuration and declarations
 
 bit cycle = 0; //main routine semaphore
+bit Couleur = 0;
 
 void main() {
     
@@ -23,7 +24,13 @@ void main() {
     
     for(;;){
             
-        if(Couleur)mod_couleur();//routine pour capturer la couleur
+        if(Couleur){//routine pour capturer la couleur
+            t = (TMR1H << 8) | TMR1L;
+            TMR1H = 0;
+            TMR1L = 0;
+            mod_couleur();
+            Couleur = 0;
+        }
         
         if(cycle){//routine principale
             mod_ultrason();
@@ -67,10 +74,7 @@ void interrupt ISR(){
     
     //color sensor routine timing
     if(PIR1bits.TMR1GIF){
-        t = (TMR1H << 8) | TMR1L;
         Couleur = 1;
-        TMR1H = 0;
-        TMR1L = 0;
         PIR1bits.TMR1GIF = 0;
     }
 }
