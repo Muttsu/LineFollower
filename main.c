@@ -24,13 +24,13 @@ void main() {
     
     for(;;){
             
-//        if(Couleur){//routine pour capturer la couleur
-//            t = (TMR1H << 8) | TMR1L;
-//            TMR1H = 0;
-//            TMR1L = 0;
-//            mod_couleur();
-//            Couleur = 0;
-//        }
+        if(Couleur){//routine pour capturer la couleur
+            t = (TMR1H << 8) | TMR1L;
+            TMR1H = 0;
+            TMR1L = 0;
+            mod_couleur();
+            Couleur = 0;
+        }
         
         if(cycle){//routine principale
             mod_ultrason();
