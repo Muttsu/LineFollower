@@ -50,37 +50,16 @@ void UpdateIR(){
 
 uint GetPos(){
     UpdateIR();
-    static unsigned int meanSum,sum,value;
-    meanSum = sum = 0;
-    for (char i = 0; i < 8; i++){
+    static char a,n;
+    a = n = 0;
+    for (char i = 7; i >= 0; i--){
         //meanSum += IR[i]*i*MULTIPLIER;
-        if((IR.value>>i)&1){
-            meanSum += i<<1;
-            sum++;
+        if((IR.value>>i)&0b1){
+            a = i;
+            n++;
         }
     }
-    //au lieu de faire des divisions:
-    switch(sum){
-        case 0:
-            value = 7;      //le 7 est la valeur du milieu
-            break;
-        case 1:
-            value = meanSum;
-            break;
-        case 2:
-            value = (meanSum >> 1);
-            break;
-        case 4:
-            value = (meanSum >> 2);
-            break;
-        case 8:
-            value = (meanSum >> 3);
-            break;
-        default:
-            value = meanSum/sum;
-            break;
-    }
-    return value;
+    return (a+a+n-1);
 }
 
 void StartPID(){                //Mis a nouveau des PID1IN
