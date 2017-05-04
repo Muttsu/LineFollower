@@ -52,10 +52,10 @@ uint GetPos(){
     UpdateIR();
     static char a,n;
     a = n = 0;
-    for (char i = 7; i >= 0; i--){
+    for (char i = 8; i > 0; i--){
         //meanSum += IR[i]*i*MULTIPLIER;
-        if((IR.value>>i)&0b1){
-            a = i;
+        if((IR.value>>(i-1))&0b1){
+            a = i-1;
             n++;
         }
     }

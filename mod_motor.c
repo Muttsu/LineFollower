@@ -1,7 +1,7 @@
 #include "config.h"
 
 unsigned char state;
-unsigned int vitesse=0;
+int vitesse=0;
 //state designe le mode des moteurs
 //0: stop
 //1: vitesse lente
@@ -37,7 +37,9 @@ void mod_motor_init(){      //procesus obtenu de la fiche de documentation
 }
 
 void drive(){
-    signed long value = (correction<-vitesse?-vitesse:(correction>vitesse?vitesse:correction));
+    signed long value = correction;
+    if(value<(-vitesse))value=(-vitesse);
+    if(value>vitesse)value=vitesse;
     unsigned int l = vitesse + value;
     unsigned int r = vitesse - value;
     PWM3DCH = (unsigned short)(l >> 2);
@@ -55,23 +57,25 @@ void stop(){
 void mod_motor(){  
     switch(state){
         case 0:
-            if(vitesse)vitesse-=32;   
+            if(vitesse!=0)vitesse-=32;   
             else vitesse=0;
+            drive();
             break;
         case 1:
-            if(vitesse>DCSMSP)vitesse-=32;
-            else vitesse=DCSMSP;
+            vitesse=DCSMSP;
+            drive();
             break;
         case 2:
-            if(vitesse<DCSP)vitesse+=32;
-            else vitesse=DCSP;
+            if(vitesse<DCSP)vitesse+=16;;
+            drive();
             break;
         case 3:
-            stop();
+            vitesse = 0;
+            drive();
             break;
         default:
-            if(vitesse)vitesse-=32;   
+            if(vitesse)vitesse-=32;
+            drive();
             break;
     }
-    if(state!=3)drive();
 }

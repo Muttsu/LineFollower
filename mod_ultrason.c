@@ -1,12 +1,12 @@
 #include "config.h"
 
-bit lancer_mesure_ultrason = 0;            //Sémaphore pour lancer la mesure de la distance   
-bit mesure_ultrason_done = 0;              //Sémaphore indiquant la fin de la mesure de la distance
-bit attente_ultrason = 0;                  //Sémaphore indiquant l'attente entre deux prise de mesure (recommendé de 50ms)
-bit attente_pulse = 0;                     //Sémaphore indiquant l'attente pendant le pulse qui commence la mesure (temps minimum d'attente: 10us)
+char lancer_mesure_ultrason = 0;            //Sémaphore pour lancer la mesure de la distance   
+char mesure_ultrason_done = 0;              //Sémaphore indiquant la fin de la mesure de la distance
+char attente_ultrason = 0;                  //Sémaphore indiquant l'attente entre deux prise de mesure (recommendé de 50ms)
+char attente_pulse = 0;                     //Sémaphore indiquant l'attente pendant le pulse qui commence la mesure (temps minimum d'attente: 10us)
 
 unsigned int temps_ultrason;
-char distance_objet;
+unsigned int distance_objet;
 
 // *** Initialisations générales ***
 void mod_ultrason()
@@ -56,12 +56,13 @@ void analyse_distance()
 {
     static char test=0;
     
-    temps_ultrason = (TMR5L | (TMR5H<<8)); 
-    distance_objet = ((temps_ultrason/57)>>3);   //Le 57 est donnée dans la fiche technique du capteur, le 8 viens du cycle d'horloge  
+    temps_ultrason = (TMR5H);
+    temps_ultrason <<= 8;
+    temps_ultrason |= TMR5L; 
     attente_ultrason = 1;                   //Attente pour le bon fonctionnement du capteur
     
     test<<=1;
-    if(distance_objet < 20&&distance_objet!=8)test|=0b1; //lorsque il n'y a pas dobstacle la distance_objet donne 8 alors on lexclus du if
+    if(temps_ultrason < 12000)test|=0b1; //lorsque il n'y a pas dobstacle la distance_objet donne 8 alors on lexclus du if
     if(test==0xff)state=3;//stop
     else if(!test)state=2;//vitesse normale
 }
