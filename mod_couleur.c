@@ -4,7 +4,7 @@ unsigned int t = 0;
 
 void mod_couleur() {
     static unsigned int freq_1,freq_2,freq_3,freq_4;
-    static float rouge,bleu,vert;
+    static char rouge,bleu,vert;
     static char t_blanc,t_rouge,t_bleu,t_vert;
     static char n = 0;
     
@@ -26,9 +26,9 @@ void mod_couleur() {
             t_bleu<<=1;
             t_vert<<=1;
             
-            bleu = freq_2 * 100.0f /freq_1;
-            rouge = freq_3 * 100.0f /freq_1;
-            vert = freq_4 * 100.0f /freq_1;
+            bleu = freq_2 * 100 /freq_1;
+            rouge = freq_3 * 100 /freq_1;
+            vert = freq_4 * 100 /freq_1;
             if(rouge > 105 && rouge < 140 && bleu > 105 && bleu < 140 && vert < 100){
                 t_blanc|=0b1;//BLANC
             } 
